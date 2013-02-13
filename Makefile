@@ -1,7 +1,7 @@
 all: sha3
 
 sha3: round.o keccak_f.o
-	gcc round.o keccak_f.o -o sha3
+	gcc round.o keccak_f.o -o sha3.out
 
 round.o: round.c
 	gcc -c round.c -std=c99 -Wall
