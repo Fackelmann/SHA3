@@ -2,6 +2,10 @@
 #include <stdint.h>
 #include <inttypes.h>
 #include <stdlib.h>
+#include <string.h>
+#include "sponge.h"
+
+uint8_t *padding(uint8_t*,int32_t*);
 
 const int64_t r[5][5]={ {0,36,3,41,18},
 			{1,44,10,45,2},
@@ -58,21 +62,4 @@ int64_t **sha3_round(int64_t **A, int64_t RC){
   return A;
 }
 
-int main(){
-  int64_t **A = (int64_t **)malloc(5 * sizeof(int64_t*));
-  for(int64_t i = 0; i < 5; i++)A[i] = (int64_t *)malloc(5 * sizeof(int64_t));
-    for(uint8_t x=0;x<5;x++){
-    for(uint8_t y=0;y<5;y++){
-      A[x][y]=x+y;
-    }
-  }
-    A[0][0]=20;
-  A=sha3_round(A,0x8000000080008008);
 
-  for(uint8_t x=0;x<5;x++){
-    for(uint8_t y=0;y<5;y++){
-      printf("A[%d][%d]%"PRIx64"\n",x,y,A[x][y]);
-    }
-  }
-  return 0;
-}
