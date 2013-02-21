@@ -8,17 +8,16 @@
 
 int main(){
   printf("Hola\n");
-  char *message="Hello, world!\n";
+  char *message="abc";
   printf("Adios\n");
   int32_t size=(int32_t *)strlen(message);;
   int32_t *psize=&size;
   //  message=(uint8_t *)message;
   uint8_t *newmessage;
-  newmessage=padding((uint8_t *)message,psize);
-  printf("%d\n",size);
-  for(int32_t i=0;i<size;i++){
+  newmessage=sponge((uint8_t *)message,*psize);
+  printf("%d\n",*psize);
+  for(int32_t i=0;i<64;i++){
     printf("%d %X\n",i,*(newmessage+i));
   }
-
   return 0;
 }
