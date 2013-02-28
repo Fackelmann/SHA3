@@ -12,14 +12,14 @@ uint8_t *sponge(uint8_t* M,int32_t size){
   int32_t w=8;
   printf("Padding\n");
   /*Padding*/
-  if((size%72)!=0){//r=72 bytes
+  if((size%r)!=0){//r=72 bytes
     M=padding(M,&size);
   }
   //  printf("size= %d\n",size);
   int64_t *nM;
-  for(int32_t i=0; i<size;i=i+sizeof(int64_t)){
+  /*  for(int32_t i=0; i<size;i=i+sizeof(int64_t)){
     swap((char *)(M+i),sizeof(int64_t));
-  }
+    }*/
   nM=(int64_t *)M;
   printf("%"PRId64"\n",*nM);
   printf("Initialization\n");
@@ -53,7 +53,12 @@ uint8_t *sponge(uint8_t* M,int32_t size){
       }
     }
   }
-  }
+ }
+
+  /*  for(int32_t i=0; i<64;i=i+sizeof(int64_t)){
+    swap((char *)(Z+i),sizeof(int64_t));
+    }*/
+
   /*  int64_t *Z=(int64_t *)calloc(8,sizeof(int64_t));
   for(int32_t i=0;i<9;i++){
     *(Z+i)=*(S+i);

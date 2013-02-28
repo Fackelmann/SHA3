@@ -34,7 +34,7 @@ int64_t **sha3_round(int64_t **A, int64_t RC){
     C[x]=A[x][0] ^ A[x][1] ^ A[x][2]^ A[x][3] ^ A[x][4];
   }
   for(uint8_t x=0;x<5;x++){
-    D[x]=C[mod((x-1),5)] ^ ((C[mod((x-1),5)] << 1) | (C[mod((x-1),5)] >> 63));
+    D[x]=C[(x + 4) % 5] ^ ((C[(x + 1) % 5] << 1) | (C[(x + 1) % 5] >> 63));
   }
   for(uint8_t x=0;x<5;x++){
     for(uint8_t y=0;y<5;y++){
@@ -45,14 +45,14 @@ int64_t **sha3_round(int64_t **A, int64_t RC){
   /*Rho and pi steps*/
   for(uint8_t x=0;x<5;x++){
     for(uint8_t y=0;y<5;y++){
-      B[x][mod((2*x+3*y),5)]=((A[x][y] << r[x][y]) | (A[x][y] >> (64-r[x][y])));
+      B[y][mod((2*x+3*y),5)]=((A[x][y] << r[x][y]) | (A[x][y] >> (64-r[x][y])));
     }
   }
 
   /*Xi state*/
   for(uint8_t x=0;x<5;x++){
     for(uint8_t y=0;y<5;y++){
-      A[x][y]=B[x][y]^(~B[mod((x+1),5)][y] & B[mod((x+2),5)][y]);
+      A[x][y]=B[x][y]^((~B[mod((x+1),5)][y]) & B[mod((x+2),5)][y]);
     }
   }
 
@@ -61,5 +61,3 @@ int64_t **sha3_round(int64_t **A, int64_t RC){
 
   return A;
 }
-
-
