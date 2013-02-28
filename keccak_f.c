@@ -3,7 +3,7 @@
 #include <inttypes.h>
 #include "round.h"
 
-const int64_t RC[24]={ 0x0000000000000001,
+const uint64_t RC[24]={ 0x0000000000000001,
 		       0x0000000000008082,
 		       0x800000000000808A,
 		       0x8000000080008000,
@@ -29,7 +29,7 @@ const int64_t RC[24]={ 0x0000000000000001,
 		       0x8000000080008008
 };
 
-int64_t **keccak_f(int64_t **A){
+uint64_t **keccak_f(uint64_t **A){
   for(int32_t i=0;i<24;i++){
     A=sha3_round(A,RC[i]);
   }

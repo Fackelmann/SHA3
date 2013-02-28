@@ -16,16 +16,16 @@ uint8_t *sponge(uint8_t* M,int32_t size){
     M=padding(M,&size);
   }
   //  printf("size= %d\n",size);
-  int64_t *nM;
-  /*  for(int32_t i=0; i<size;i=i+sizeof(int64_t)){
-    swap((char *)(M+i),sizeof(int64_t));
+  uint64_t *nM;
+  /*  for(int32_t i=0; i<size;i=i+sizeof(uint64_t)){
+    swap((char *)(M+i),sizeof(uint64_t));
     }*/
-  nM=(int64_t *)M;
+  nM=(uint64_t *)M;
   printf("%"PRId64"\n",*nM);
   printf("Initialization\n");
   /*Initialization*/
-  int64_t **S=(int64_t **)calloc(5,sizeof(int64_t*));
-  for(int64_t i = 0; i < 5; i++) S[i] = (int64_t *)calloc(5,sizeof(int64_t));
+  uint64_t **S=(uint64_t **)calloc(5,sizeof(uint64_t*));
+  for(uint64_t i = 0; i < 5; i++) S[i] = (uint64_t *)calloc(5,sizeof(uint64_t));
 
   printf("Absorbing\n");
   /*Absorbing Phase*/
@@ -43,7 +43,7 @@ uint8_t *sponge(uint8_t* M,int32_t size){
   printf("Squeezing\n");
   /*Squeezing phase*/
   int32_t b=0;
-  int64_t *Z=(int64_t *)calloc(8,sizeof(int64_t));
+  uint64_t *Z=(uint64_t *)calloc(8,sizeof(uint64_t));
   while(b<8){
   for(int32_t y=0;y<5;y++){
     for(int32_t x=0;x<5;x++){
@@ -55,11 +55,11 @@ uint8_t *sponge(uint8_t* M,int32_t size){
   }
  }
 
-  /*  for(int32_t i=0; i<64;i=i+sizeof(int64_t)){
-    swap((char *)(Z+i),sizeof(int64_t));
+  /*  for(int32_t i=0; i<64;i=i+sizeof(uint64_t)){
+    swap((char *)(Z+i),sizeof(uint64_t));
     }*/
 
-  /*  int64_t *Z=(int64_t *)calloc(8,sizeof(int64_t));
+  /*  uint64_t *Z=(uint64_t *)calloc(8,sizeof(uint64_t));
   for(int32_t i=0;i<9;i++){
     *(Z+i)=*(S+i);
     S=keccak_f(S);

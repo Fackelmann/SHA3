@@ -7,7 +7,7 @@
 
 uint8_t *padding(uint8_t*,int32_t*);
 
-const int64_t r[5][5]={ {0,36,3,41,18},
+const uint64_t r[5][5]={ {0,36,3,41,18},
 			{1,44,10,45,2},
 			{62,6,43,15,61},
 			{28,55,25,21,56},
@@ -24,10 +24,10 @@ int mod (int a, int b)
   return ret;
 }
 
-int64_t **sha3_round(int64_t **A, int64_t RC){
-  int64_t C[5];
-  int64_t D[5];
-  int64_t B[5][5];
+uint64_t **sha3_round(uint64_t **A, uint64_t RC){
+  uint64_t C[5];
+  uint64_t D[5];
+  uint64_t B[5][5];
 
   /* Theta step */
   for(uint8_t x=0;x<5;x++){
