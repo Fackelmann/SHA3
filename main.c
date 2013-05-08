@@ -6,14 +6,11 @@
 #include "round.h"
 #include "sponge.h"
 
-int main(){
-  //  char *message="abc";
-  //  char *message="abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
-  char *message="abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmnhijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu";
-  int32_t size=strlen(message);;
+int main(int argc, char *argv[]){
+  int32_t size=strlen(argv[1]);
   int32_t *psize=&size;
   uint8_t *newmessage;
-  newmessage=sponge((uint8_t *)message,*psize);
+  newmessage=sponge((uint8_t *)argv[1],*psize);
   for(int32_t i=0;i<64;i++){
     printf("%d %X\n",i,*(newmessage+i));
   }
