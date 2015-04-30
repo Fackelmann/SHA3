@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
   newmessage=sponge((uint8_t *)argv[1],*psize);
 
   for(int32_t i=0;i<64;i++){
-    printf("%x",i,*(newmessage+i));
+    printf("%02x",*(newmessage+i));
   }
   printf("\n");
 
